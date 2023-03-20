@@ -63,7 +63,7 @@ Um ein ML Modell zu trainieren, werden Daten benötigt. Um die Daten zu sammeln,
 Dies geschieht, indem der Arduino das Projekt aus 3.4. Edge Impulse angesteuert. 
 Das Modell muss insgesamt 3 Variationen klassifizieren können. Den Posteinwurf, die Postentnahme und das Ereignis, dass nichts geschieht.
 
-### Um den Arduino mit Edge Ipulse zu verbinden, muss dabei zu aller erst, 
+### 4.1. Um den Arduino mit Edge Ipulse zu verbinden, muss dabei zu aller erst, 
 1. der Arduino mit dem Laptop per Kabel verbunden werden, sodass der Arduino leuchtet.
 2. der Terminal auf dem Laptop geöffnet werden.
 3. der Knopf auf dem Arduino gedrückt werden, sodass der Arduino orange aufleuchtet.
@@ -74,7 +74,7 @@ Das Modell muss insgesamt 3 Variationen klassifizieren können. Den Posteinwurf,
 Nun kann der Arduino über den Reiter "Data Acquisition" in Edge Impulse angesteuert werden und das Modell mit Daten gefüttert werden.
 Der Name, der den Datensätzen gegeben wird, ist gleichzeitig das Label für das Training. Das heißt: Wird das Ereignis "Posteinwurf" genannt, so wird unter dem Label "Posteinwurf" der Datensatz gespeichert und erkannt. 
 
-### Aufnahme der Daten in Edge Impulse > Data Acquisition > Record new Data.
+### 4.2. Aufnahme der Daten in Edge Impulse > Data Acquisition > Record new Data.
 - Sensor in Edge Impulse auf "Internal" Sensor stellen. (dieser misst die Bewegung, das Magnetfeld und die Geschwindigkeit des Arduinos) 
 - Zeitraum der Aufnahme der Daten auf 5 Sekunden stellen.
 - Label festlegen (Posteinwurf, Postentnahme, Idle).
@@ -84,17 +84,18 @@ Der Name, der den Datensätzen gegeben wird, ist gleichzeitig das Label für das
 - Wiederholung bis 5 Minuten an Daten pro Label vorhanden sind. 
 - Wiederholung für die anderen beiden Label.
 
-## Training des Modells
+## 5. Training des Modells
 In diesem Abschnitt wird das Training des Modells mithilfe der aufgenommenen Daten in Edge Impulse genauer erklärt. 
 
-Wurden genug Daten gesammelt, so kann das Modell in Edge Impulse > Impulse Design trainiert werden. 
+### 5.1. Create Impulse
+Über Edge Impulse > Impulse Design > Create Impulse kann das Modell nun trainiert werden. 
 
 Zu aller erst wird,
 - Time Series gewählt
 - die Window size auf die Zeit der Datenblöcke gesetzt (in diesem Fall 5 Sekunden). 
 
 Danach werden,
-- in der Spektralanalyse die Features ausgewählt, die von Bedeutung sind. (Hierfür ist es zu empfehlen sich die aufgenommenen Daten noch ein Mal genauer unter die Lupe zu nehmen. In diesem Fall hatte das Modell im Livetest am Briefkasten die beste Konfiguration, wenn  nur die Gyroskopdaten genutzt wurden. Das Magnetfelddaten und Beschleunigungsdaten waren nicht hilfreich, für die Vorhersage.)
+- in der Spektralanalyse die Features ausgewählt, die von Bedeutung sind. (Hierfür ist es zu empfehlen sich die aufgenommenen Daten noch ein Mal genauer unter die Lupe zu nehmen. In diesem Fall hatte das Modell im Livetest am Briefkasten die beste Konfiguration, wenn nur die Gyroskopdaten genutzt wurden. Die Magnetfelddaten und Beschleunigungsdaten waren für die Vorhersage nicht hilfreich.)
 
 Zum Schluss wird,
 - für die Modellerstellung, die Klassifikation gewählt, da eine Zuordnung der drei Klassen erreicht werden soll.
@@ -102,6 +103,16 @@ Zum Schluss wird,
 
 <img width="1153" alt="Bildschirmfoto 2023-03-20 um 13 38 37" src="https://user-images.githubusercontent.com/128368064/226341146-5ff8f0e6-567e-4d84-b318-303f467b0d64.png">
 
+### 5.2. Spectral features
+Über Edge Impulse > Impulse Design > Spectral features können die Features (Posteinwurf, Postentnahme, Idle) des Modells nun noch angepasst werden. 
+In diesem Fall wurde mit den Default Einstellungen gearbeitet. Demenstprechend wurde an den Einstellungen nichts geändert.
+Durch den Klick auf "Save Parameters" werden die Parameter erstellt. Dies kann ein paar Minuten dauern.
 
+### 5.3. Classifier
+Über Edge Impulse > Impulse Design > Classifier kann nun das Training beginnen. 
+In diesem Fall wurde mit den Default Einstellungen gearbeitet. Demenstprechend wurde an den Einstellungen nichts geändert.
+Durch den Klick auf "Start Training" wird das Modell trainiert. Dies kann ein paar Minuten dauern.
 
+## 6. Ausführung
+Im letzten Schritt wird der Code des trainierten Modells aus Edge Impulse als ZIP File exportiert und in die Arduino IDE eingepflegt. Nach ein paar kleineren Anpassungen im Code kann das Modell auf den Arduino geladen und letztendlich ausgeführt werden.
 
