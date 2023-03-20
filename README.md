@@ -1,6 +1,6 @@
 # Smarter Briefkasten
 Diese ReadMe File dient als Anleitung zur Konstruktion eines smarten Briefkastens mit einem Arduino Nano BLE (Sense) und einem MacOs Computer. 
-Die Anleitung ist in die Punkte, Einleitung, Hardware & Software, Installation, Datenerhebung, Datenaufbereitung und Ausführung aufgeteilt.
+Die Anleitung ist in die Punkte, Einleitung, Hardware & Software, Installation, Datenerhebung, Training des Modells und Ausführung aufgeteilt.
 Das Ergebnis dieser Anleitung ist ein funktionierendes Tiny Machine Learning Modell auf einem Arduino Nano BLE 33 (Sense), dass durch eigenständige Anbringung an einen Briefkasten, die im Punkt "Einleitung" beschriebende Funktionalität aufweist.
 
 ## 1. Einleitung
@@ -63,7 +63,7 @@ Um ein ML Modell zu trainieren, werden Daten benötigt. Um die Daten zu sammeln,
 Dies geschieht, indem der Arduino das Projekt aus 3.4. Edge Impulse angesteuert. 
 Das Modell muss insgesamt 3 Variationen klassifizieren können. Den Posteinwurf, die Postentnahme und das Ereignis, dass nichts geschieht.
 
-Um den Arduino mit Edge Ipulse zu verbinden, muss dabei zu aller erst, 
+### Um den Arduino mit Edge Ipulse zu verbinden, muss dabei zu aller erst, 
 1. der Arduino mit dem Laptop per Kabel verbunden werden, sodass der Arduino leuchtet.
 2. der Terminal auf dem Laptop geöffnet werden.
 3. der Knopf auf dem Arduino gedrückt werden, sodass der Arduino orange aufleuchtet.
@@ -72,10 +72,9 @@ Um den Arduino mit Edge Ipulse zu verbinden, muss dabei zu aller erst,
 6. das Projekt ausgewählt werden, unter welchem die Daten gesammelt werden sollen. (im Terminal)
 
 Nun kann der Arduino über den Reiter "Data Acquisition" in Edge Impulse angesteuert werden und das Modell mit Daten gefüttert werden.
-
 Der Name, der den Datensätzen gegeben wird, ist gleichzeitig das Label für das Training. Das heißt: Wird das Ereignis "Posteinwurf" genannt, so wird unter dem Label "Posteinwurf" der Datensatz gespeichert und erkannt. 
 
-Aufnahme der Daten in Edge Impulse > Data Acquisition > Record new Data.
+### Aufnahme der Daten in Edge Impulse > Data Acquisition > Record new Data.
 - Sensor in Edge Impulse auf "Internal" Sensor stellen. (dieser misst die Bewegung, das Magnetfeld und die Geschwindigkeit des Arduinos) 
 - Zeitraum der Aufnahme der Daten auf 5 Sekunden stellen.
 - Label festlegen (Posteinwurf, Postentnahme, Idle).
@@ -85,6 +84,24 @@ Aufnahme der Daten in Edge Impulse > Data Acquisition > Record new Data.
 - Wiederholung bis 5 Minuten an Daten pro Label vorhanden sind. 
 - Wiederholung für die anderen beiden Label.
 
-Anschließend solltest du gleichmäßig Testdaten zuteilen, damit etwa 20% des Gesamtdatensatzes zum Testen verwendet werden. Im Fall von 90 Datenpaketen möchtest du 18 Punkte haben, also 6 Testdatensätze pro Label.
-Klicke dafür in Data Acquisition auf Select Multiple Items und wähle deine Testdaten aus. Klicke danach auf “Move to test set”.
+## Training des Modells
+In diesem Abschnitt wird das Training des Modells mithilfe der aufgenommenen Daten in Edge Impulse genauer erklärt. 
+
+Wurden genug Daten gesammelt, so kann das Modell in Edge Impulse > Impulse Design trainiert werden. 
+
+Zu aller erst wird,
+- Time Series gewählt
+- die Window size auf die Zeit der Datenblöcke gesetzt (in diesem Fall 5 Sekunden). 
+
+Danach werden,
+- in der Spektralanalyse die Features ausgewählt, die von Bedeutung sind. (Hierfür ist es zu empfehlen sich die aufgenommenen Daten noch ein Mal genauer unter die Lupe zu nehmen. In diesem Fall hatte das Modell im Livetest am Briefkasten die beste Konfiguration, wenn  nur die Gyroskopdaten genutzt wurden. Das Magnetfelddaten und Beschleunigungsdaten waren nicht hilfreich, für die Vorhersage.)
+
+Zum Schluss wird,
+- für die Modellerstellung, die Klassifikation gewählt, da eine Zuordnung der drei Klassen erreicht werden soll.
+- durch "Save Impulse" wird der Impulse gespeichert. 
+
+<img width="1153" alt="Bildschirmfoto 2023-03-20 um 13 38 37" src="https://user-images.githubusercontent.com/128368064/226341146-5ff8f0e6-567e-4d84-b318-303f467b0d64.png">
+
+
+
 
