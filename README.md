@@ -75,14 +75,14 @@ Nun kann der Arduino über den Reiter "Data Acquisition" in Edge Impulse angeste
 Der Name, der den Datensätzen gegeben wird, ist gleichzeitig das Label für das Training. Das heißt: Wird das Ereignis "Posteinwurf" genannt, so wird unter dem Label "Posteinwurf" der Datensatz gespeichert und erkannt. 
 
 ### 4.2. Aufnahme der Daten in Edge Impulse > Data Acquisition > Record new Data.
-- Sensor in Edge Impulse auf "Internal" Sensor stellen. (dieser misst die Bewegung, das Magnetfeld und die Geschwindigkeit des Arduinos) 
-- Zeitraum der Aufnahme der Daten auf 5 Sekunden stellen.
-- Label festlegen (Posteinwurf, Postentnahme, Idle).
-- Arduino am besten wie im Bild anbringen: ![IMG_5491](https://user-images.githubusercontent.com/128368064/226336569-3c9ff4e2-a47b-458c-9c96-34a20976522a.jpg) (Dies kann jedoch je nach Briefkasten anders aussehen)
-- Auf "Sample" klicken.
-- Bewegung des ausgewählten Labels imitieren. 
-- Wiederholung bis 5 Minuten an Daten pro Label vorhanden sind. 
-- Wiederholung für die anderen beiden Label.
+1. Sensor in Edge Impulse auf "Internal" Sensor stellen. (dieser misst die Bewegung, das Magnetfeld und die Geschwindigkeit des Arduinos) 
+2. Zeitraum der Aufnahme der Daten auf 5 Sekunden stellen.
+3. Label festlegen (Posteinwurf, Postentnahme, Idle).
+4. Arduino am besten wie im Bild anbringen: ![IMG_5491](https://user-images.githubusercontent.com/128368064/226336569-3c9ff4e2-a47b-458c-9c96-34a20976522a.jpg) (Dies kann jedoch je nach Briefkasten anders aussehen)
+5. Auf "Sample" klicken.
+6. Bewegung des ausgewählten Labels imitieren. 
+7. Wiederholung bis 5 Minuten an Daten pro Label vorhanden sind. 
+8. Wiederholung für die anderen beiden Label.
 
 ## 5. Training des Modells
 In diesem Abschnitt wird das Training des Modells mithilfe der aufgenommenen Daten in Edge Impulse genauer erklärt. 
@@ -91,15 +91,15 @@ In diesem Abschnitt wird das Training des Modells mithilfe der aufgenommenen Dat
 Über Edge Impulse > Impulse Design > Create Impulse kann das Modell nun trainiert werden. 
 
 Zu aller erst wird,
-- Time Series gewählt
-- die Window size auf die Zeit der Datenblöcke gesetzt (in diesem Fall 5 Sekunden). 
+1. Time Series gewählt
+2. die Window size auf die Zeit der Datenblöcke gesetzt (in diesem Fall 5 Sekunden). 
 
 Danach werden,
-- in der Spektralanalyse die Features ausgewählt, die von Bedeutung sind. (Hierfür ist es zu empfehlen sich die aufgenommenen Daten noch ein Mal genauer unter die Lupe zu nehmen. In diesem Fall hatte das Modell im Livetest am Briefkasten die beste Konfiguration, wenn nur die Gyroskopdaten genutzt wurden. Die Magnetfelddaten und Beschleunigungsdaten waren für die Vorhersage nicht hilfreich.)
+3. in der Spektralanalyse die Features ausgewählt, die von Bedeutung sind. (Hierfür ist es zu empfehlen sich die aufgenommenen Daten noch ein Mal genauer unter die Lupe zu nehmen. In diesem Fall hatte das Modell im Livetest am Briefkasten die beste Konfiguration, wenn nur die Gyroskopdaten genutzt wurden. Die Magnetfelddaten und Beschleunigungsdaten waren für die Vorhersage nicht hilfreich.)
 
 Zum Schluss wird,
-- für die Modellerstellung, die Klassifikation gewählt, da eine Zuordnung der drei Klassen erreicht werden soll.
-- durch "Save Impulse" wird der Impulse gespeichert. 
+4. für die Modellerstellung, die Klassifikation gewählt, da eine Zuordnung der drei Klassen erreicht werden soll.
+5. durch "Save Impulse" wird der Impulse gespeichert. 
 
 <img width="1153" alt="Bildschirmfoto 2023-03-20 um 13 38 37" src="https://user-images.githubusercontent.com/128368064/226341146-5ff8f0e6-567e-4d84-b318-303f467b0d64.png">
 
@@ -115,4 +115,19 @@ Durch den Klick auf "Start Training" wird das Modell trainiert. Dies kann ein pa
 
 ## 6. Ausführung
 Im letzten Schritt wird der Code des trainierten Modells aus Edge Impulse als ZIP File exportiert und in die Arduino IDE eingepflegt. Nach ein paar kleineren Anpassungen im Code kann das Modell auf den Arduino geladen und letztendlich ausgeführt werden.
+
+Dies erfolgt wie folgt:
+1. Über Edge Impulse > Deplyoment > Arduino Library auswählen.
+2. Runterscrollen und auf "Build" klicken. (ZIP Datei wird erstellt und heruntergeladen)
+<img width="635" alt="Bildschirmfoto 2023-03-20 um 14 18 40" src="https://user-images.githubusercontent.com/128368064/226354730-60ecf580-6258-4107-bc44-1a04a30db8e9.png">
+3. In die Arduino IDE wechseln. 
+4. In der Taskleiste unter Sketch > Include library > Add .ZIP Library... > "deine erstellte ZIP File aus 2" auswählen.
+5. In der Taskleiste unter Files > Examples > "deine erstellte Library File" auswählen > nano_ble33_sense > nano_ble33_sense_accelerometer.
+6. Der Code wurde erstellt.
+
+Nun ist der Code für das Modell in der Arduion IDE. Das Problem dabei ist jedoch, dass der Code momentan nur die Accelerometer Daten ausliest und noch noch keine LED bei einem gewissen Ereignis ansteuert. 
+Deshalb wird in den folgenden Zeilen zusätzlich der folgende Code hinzgefügt oder abgeändert.
+
+
+
 
