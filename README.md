@@ -50,7 +50,7 @@ Es wird für NPM Installationen der Edge Impulse Tools, benötigt.
 
 - Terminal aufrufen
 - npm install -g edge-impulse-cli --force im Terminal ausführen
-<br>
+
 ### 3.4. Edge Impulse
 Mit Edge Impulse können Entwickler Machine-Learning-Modelle für die Verarbeitung von Sensor- und IoT-Daten erstellen, trainieren und bereitstellen.
 
@@ -130,18 +130,19 @@ Nun ist der Code für das Modell in der Arduion IDE. Das Problem dabei ist jedoc
 Deshalb wird in den folgenden Schritten zusätzlich der folgende Code hinzugefügt oder abgeändert.
 
 1. In Zeile 25 muss folgender Code hinzugefügt werden.
-  *-#define EI_CLASSIFIER_SENSOR_GYR EI_CLASSIFIER_SENSOR_GYROSCOPE*
-  *-#define LED 12*
 
-  Dieser Code dient dazu dass der Sensor Gyroscope, mit dem die Auswertungen gemacht werden, eingefügt werden.
-  Außerdem wird die LED 12 des Arduino definiert.
+  *#define EI_CLASSIFIER_SENSOR_GYR EI_CLASSIFIER_SENSOR_GYROSCOPE*
+  *#define LED 12*
+
+    Dieser Code dient dazu dass der Sensor Gyroscope, mit dem die Auswertungen gemacht werden, eingefügt werden.
+    Außerdem wird die LED 12 des Arduino definiert.
  
 2. In Zeile 55 muss in der Methode *void setup()* folgender Code hinzugefügt werden.
 
     *pinMode(LED, OUTPUT);
     pinMode(LED_BUILTIN, OUTPUT);*
  
-  Dieser Code dient dazu, dass die gewünschten LED's angesteuert werden können.
+    Dieser Code dient dazu, dass die gewünschten LED's angesteuert werden können.
 
 3. In Zeile 95 muss in der Methode *void loop()* folgender Code hinzugefügt werden.
 
@@ -149,13 +150,13 @@ Deshalb wird in den folgenden Schritten zusätzlich der folgende Code hinzugefü
     delay(1000);                      
     digitalWrite(LED_BUILTIN, LOW);*
     
-  Dieser Code dient dazu, dass vor jeder Aufnahme von Bewegungen durch den Arduino, die orangene LED des Arduino kurz aufleuchtet.
+    Dieser Code dient dazu, dass vor jeder Aufnahme von Bewegungen durch den Arduino, die orangene LED des Arduino kurz aufleuchtet.
 
  4. In Zeile 108 wurde in der Methode *void loop()* folgender Code abgeändert.
  
     *IMU.readAccelerometer(buffer[ix], buffer[ix + 1], buffer[ix + 2]);* in *IMU.readGyroscope(buffer[ix], buffer[ix + 1], buffer[ix + 2]);*
     
-  Diese Code Änderung dient dazu, dass nur die Gyroscope Daten durch den Arduino aufgenommen werden.
+    Diese Code Änderung dient dazu, dass nur die Gyroscope Daten durch den Arduino aufgenommen werden.
  
  5. Zu guter letzt wurde in Zeile 148 in der Methode *void loop()* folgender Code am Ende der Methode hinzugefügt.
 
@@ -168,8 +169,8 @@ Deshalb wird in den folgenden Schritten zusätzlich der folgende Code hinzugefü
     //digitalWrite(BLUE, LOW);
     }*
   
-  Dieser Code dient dazu, wenn das Label Einwurf mit einer Wahrscheinlichkeit von p > 0,5 klassifiziert wurde, die LED 12, blau aufleuchtet.
-  Wurde das Label Postentnahme mit einer Wahrscheinlichkeit von p > 0,5 klassifiziert, wird die LED 12 ausgeschalten.
+    Dieser Code dient dazu, wenn das Label Einwurf mit einer Wahrscheinlichkeit von p > 0,5 klassifiziert wurde, die LED 12, blau aufleuchtet.
+    Wurde das Label Postentnahme mit einer Wahrscheinlichkeit von p > 0,5 klassifiziert, wird die LED 12 ausgeschalten.
   
 
 
