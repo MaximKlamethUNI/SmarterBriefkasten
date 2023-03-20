@@ -26,10 +26,13 @@ In diesem Abschnitt werden zu Beginn, die benötigten Hardware- & Softwarekompon
 - Node.js
 - Edge Impulse (als Datenerhebungsoberfläche) 
 
-## 3. Installation
-In diesem Abschnitt wie die Software und Tools für das Projekt eines smarten Briefkasten installiert wurden. Dies wird für Übersichtlichkeit in Stichpunkten beschrieben.
+## 3. Installation & Aufbau
+In diesem Abschnitt wird erklärt, wie die Software, Tools und Hardware für das Projekt eines smarten Briefkasten installiert und aufgebaut wurden. Dies wird für die Übersichtlichkeit in Stichpunkten beschrieben.
 
-### 3.1. Arduino IDE (Version 2.0.4 oder höher)
+### 3.1. Softwareinstallation
+Im folgenden Abschnitt werden die Tools oder Softwares im kurzen beschrieben und der Installationsprozess erklärt.
+
+#### 3.1.1. Arduino IDE (Version 2.0.4 oder höher)
 Beschreibung: Mit der Arduino IDE kann man Code für Arduino Mikrocontroller schreiben und hochladen, um elektronische Projekte zu erstellen und zu automatisieren.
 
 - Download der Software
@@ -38,24 +41,36 @@ Beschreibung: Mit der Arduino IDE kann man Code für Arduino Mikrocontroller sch
 - Arduino Nano BLE 33 mit Computer per USB verbinden
 - Wenn per USB verbunden: Tools > Port und Arduino auswählen ( "/dev/cu.usbmodem14112" (Arduino Nano BLE 33) )
 
-### 3.2. Brew 
+#### 3.1.2. Brew 
 Beschreibung: Mit Brew (auch bekannt als Homebrew) kann man unter macOS zusätzliche Softwarepakete und Tools installieren und verwalten, die nicht standardmäßig im Betriebssystem enthalten sind. Wenn Brew noch nicht installiert ist, kann dies über folgenden Link getan werden. (https://brew.sh/)
 
 - Terminal aufrufen
 - brew install arduino-cli im Terminal ausführen (Nun kann man Kommandos an den Arduino senden)
 
-### 3.3. Node.js (14 oder höher)
+#### 3.1.3. Node.js (14 oder höher)
 Beschreibung: Node.js ist eine JavaScript-Laufzeitumgebung, mit der man serverseitige Anwendungen entwickeln und ausführen kann.
 Es wird für NPM Installationen der Edge Impulse Tools, benötigt.
 
 - Terminal aufrufen
 - npm install -g edge-impulse-cli --force im Terminal ausführen
 
-### 3.4. Edge Impulse
+#### 3.1.4. Edge Impulse
 Mit Edge Impulse können Entwickler Machine-Learning-Modelle für die Verarbeitung von Sensor- und IoT-Daten erstellen, trainieren und bereitstellen.
 
 - Account erstellen (https://studio.edgeimpulse.com/studio/profile/projects)
 - Projekt erstellen
+
+### Hardwareaufbau
+In diesem Abschnitt wird erklärt wie der Arduino auf das Breadboard gesteckt wurde, und wie der Widerstand, die LED und die Verbindung, angebracht wurde.
+
+#### Arduino mit Breadboard
+
+- Arduino auf das Breadboard setzen
+- Widerstand auf den ersten Pin von links einsetzen. 
+- Die LED neben den Widerstand stecken und das andere Ende hinter den blauen Streifen des Breadboards.
+- Stromkabel an den weiß markierten Pin des Arduino stecken und das andere Ende auch hinter den blauen Streifen.
+![IMG_5482](https://user-images.githubusercontent.com/128368064/226367080-7a428b05-c0ec-40f5-9961-d1d2d717e30d.jpg)
+
 
 ## 4. Datenerhebung
 In diesem Abschnitt wird die Datenerhebung über Edge Impulse mithilfe vom Arduino Nano BLE 33 (Sense) beschrieben.
