@@ -130,8 +130,8 @@ Nun ist der Code für das Modell in der Arduion IDE. Das Problem dabei ist jedoc
 Deshalb wird in den folgenden Schritten zusätzlich der folgende Code hinzugefügt oder abgeändert.
 
 1. In Zeile 25 muss folgender Code hinzugefügt werden.
-  -*#define EI_CLASSIFIER_SENSOR_GYR EI_CLASSIFIER_SENSOR_GYROSCOPE
-  -#define LED 12*
+  *-#define EI_CLASSIFIER_SENSOR_GYR EI_CLASSIFIER_SENSOR_GYROSCOPE*
+  *-#define LED 12*
 
   Dieser Code dient dazu dass der Sensor Gyroscope, mit dem die Auswertungen gemacht werden, eingefügt werden.
   Außerdem wird die LED 12 des Arduino definiert.
