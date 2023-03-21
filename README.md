@@ -151,18 +151,18 @@ Deshalb wird in den folgenden Schritten zusätzlich der folgende Code hinzugefü
 
 1. In Zeile 25 muss folgender Code hinzugefügt werden.
 
-  ```#define EI_CLASSIFIER_SENSOR_GYR EI_CLASSIFIER_SENSOR_GYROSCOPE```
-      ```#define LED 12```
+```#define EI_CLASSIFIER_SENSOR_GYR EI_CLASSIFIER_SENSOR_GYROSCOPE```
+```#define LED 12```
 
 Dieser Code dient dazu dass der Sensor Gyroscope, mit dem die Auswertungen gemacht werden, eingefügt werden.
 Außerdem wird die LED 12 des Arduino definiert.
  
 2. In Zeile 55 muss in der Methode *void setup()* folgender Code hinzugefügt werden.
 
-    ```pinMode(LED, OUTPUT);
-    pinMode(LED_BUILTIN, OUTPUT);```
+```pinMode(LED, OUTPUT);
+pinMode(LED_BUILTIN, OUTPUT);```
  
-    Dieser Code dient dazu, dass die gewünschten LED's angesteuert werden können.
+Dieser Code dient dazu, dass die gewünschten LED's angesteuert werden können.
 
 3. In Zeile 95 muss in der Methode *void loop()* folgender Code hinzugefügt werden.
 
