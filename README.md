@@ -32,8 +32,10 @@ In diesem Abschnitt wird erklärt, wie die Software, Tools und Hardware für das
 ### 3.1. Softwareinstallation
 Im folgenden Abschnitt werden die Tools oder Softwares im kurzen beschrieben und der Installationsprozess erklärt.
 
-#### 3.1.1. Arduino IDE (Version 2.0.4 oder höher)
+#### 3.1.1. Arduino IDE (Version 2.0.4 oder höher) Link:
 Beschreibung: Mit der Arduino IDE kann man Code für Arduino Mikrocontroller schreiben und hochladen, um elektronische Projekte zu erstellen und zu automatisieren.
+Link: https://www.arduino.cc/en/software
+
 
 - Download der Software
 - Öffnen des Programs
@@ -42,7 +44,8 @@ Beschreibung: Mit der Arduino IDE kann man Code für Arduino Mikrocontroller sch
 - Wenn per USB verbunden: Tools > Port und Arduino auswählen ( "/dev/cu.usbmodem14112" (Arduino Nano BLE 33) )
 
 #### 3.1.2. Brew 
-Beschreibung: Mit Brew (auch bekannt als Homebrew) kann man unter macOS zusätzliche Softwarepakete und Tools installieren und verwalten, die nicht standardmäßig im Betriebssystem enthalten sind. Wenn Brew noch nicht installiert ist, kann dies über folgenden Link getan werden. (https://brew.sh/)
+Beschreibung: Mit Brew (auch bekannt als Homebrew) kann man unter macOS zusätzliche Softwarepakete und Tools installieren und verwalten, die nicht standardmäßig im Betriebssystem enthalten sind. Wenn Brew noch nicht installiert ist, kann dies über folgenden Link getan werden. 
+Link: https://docs.brew.sh/Installation
 
 - Terminal aufrufen
 - brew install arduino-cli im Terminal ausführen (Nun kann man Kommandos an den Arduino senden)
@@ -50,18 +53,20 @@ Beschreibung: Mit Brew (auch bekannt als Homebrew) kann man unter macOS zusätzl
 #### 3.1.3. Node.js (14 oder höher)
 Beschreibung: Node.js ist eine JavaScript-Laufzeitumgebung, mit der man serverseitige Anwendungen entwickeln und ausführen kann.
 Es wird für NPM Installationen der Edge Impulse Tools, benötigt.
+Link: https://nodejs.org/en/
 
 - Terminal aufrufen
 - npm install -g edge-impulse-cli --force im Terminal ausführen
 
 #### 3.1.4. Edge Impulse
 Mit Edge Impulse können Entwickler Machine-Learning-Modelle für die Verarbeitung von Sensor- und IoT-Daten erstellen, trainieren und bereitstellen.
+Link: https://studio.edgeimpulse.com/studio/profile/projects
 
-- Account erstellen (https://studio.edgeimpulse.com/studio/profile/projects)
+- Account erstellen 
 - Projekt erstellen
 
 ### Hardwareaufbau
-In diesem Abschnitt wird erklärt wie der Arduino auf das Breadboard gesteckt wurde, und wie der Widerstand, die LED und die Verbindung, angebracht wurde.
+In diesem Abschnitt wird erklärt wie der Arduino auf das Breadboard gesteckt wurde und wie der Widerstand, die LED und die Verbindung, angebracht wurde.
 
 #### Arduino mit Breadboard
 
@@ -146,8 +151,8 @@ Deshalb wird in den folgenden Schritten zusätzlich der folgende Code hinzugefü
 
 1. In Zeile 25 muss folgender Code hinzugefügt werden.
 
-  *#define EI_CLASSIFIER_SENSOR_GYR EI_CLASSIFIER_SENSOR_GYROSCOPE*
-  *#define LED 12*
+  ```#define EI_CLASSIFIER_SENSOR_GYR EI_CLASSIFIER_SENSOR_GYROSCOPE*
+  *#define LED 12```
 
     Dieser Code dient dazu dass der Sensor Gyroscope, mit dem die Auswertungen gemacht werden, eingefügt werden.
     Außerdem wird die LED 12 des Arduino definiert.
