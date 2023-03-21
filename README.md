@@ -153,6 +153,7 @@ Deshalb wird in den folgenden Schritten zusätzlich der folgende Code hinzugefü
 
   ```#define EI_CLASSIFIER_SENSOR_GYR EI_CLASSIFIER_SENSOR_GYROSCOPE```
       ```#define LED 12```
+
 Dieser Code dient dazu dass der Sensor Gyroscope, mit dem die Auswertungen gemacht werden, eingefügt werden.
 Außerdem wird die LED 12 des Arduino definiert.
  
