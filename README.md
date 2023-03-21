@@ -1,11 +1,11 @@
 # Smarter Briefkasten
 Diese ReadMe File dient als Anleitung zur Konstruktion eines smarten Briefkastens mit einem Arduino Nano BLE (Sense) und einem MacOs Computer. 
-Die Anleitung ist in die Punkte, Einleitung, Hardware & Software, Installation, Datenerhebung, Training des Modells und Ausführung aufgeteilt.
+Die Anleitung ist in die Punkte: Einleitung, Hardware & Software, Installation, Datenerhebung, Training des Modells und Ausführung aufgeteilt.
 Das Ergebnis dieser Anleitung ist ein funktionierendes Tiny Machine Learning Modell auf einem Arduino Nano BLE 33 (Sense), dass durch eigenständige Anbringung an einen Briefkasten, die im Punkt "Einleitung" beschriebende Funktionalität aufweist.
 
 ## 1. Einleitung
-Im Rahmen des Moduls "Wissensmanagement" der HTW Berlin wurde ein smarter Briefkasten entworfen, der dem/der Nutzer/in über eine LED mitteilt, ob sich Post in dem Briefkasten befindet oder nicht. Dabei wurde mithilfe eines Arduino Nano BLE 33 (Sense) ein Tiny Machine Learning Modell trainiert, welches auf die Ereignisse Posteinwurf & Postentnahme reagiert. Hierbei leuchtet die LED bei dem Ereignis Posteinwurf auf, während bei der Postentnahme die LED aufhört zu leuchten.
-Dies hat den Zweck, dass sich der/die Nutzer/in des Briefkastens im Falle von einem leeren Briefkasten Zeit sparen kann, da er/sie den Briefkasten nicht mehr öffnen muss wenn sich keine Post im Briefkasten befindet.
+Im Rahmen des Moduls "Wissensmanagement" der HTW Berlin wurde ein smarter Briefkasten entworfen, der dem/der Nutzer/in über eine LED mitteilt, ob sich Post in einem Briefkasten befindet oder nicht. Dabei wurde mithilfe eines Arduino Nano BLE 33 (Sense) ein Tiny Machine Learning Modell trainiert, welches auf die Ereignisse Posteinwurf & Postentnahme reagiert. Hierbei leuchtet die LED bei dem Ereignis Posteinwurf auf, während bei der Postentnahme die LED aufhört zu leuchten.
+Dies hat den Zweck, dass sich der/die Nutzer/in des Briefkastens im Falle von einem leeren Briefkasten Zeit sparen kann, da er/sie den Briefkasten nicht mehr öffnen muss.
 
 ## 2. Hardware & Software
 In diesem Abschnitt werden zu Beginn, die benötigten Hardware- & Softwarekomponenten aufgelistet, die in dem Projekt verwendet wurden.
@@ -18,7 +18,7 @@ In diesem Abschnitt werden zu Beginn, die benötigten Hardware- & Softwarekompon
 - Breadboard
 - (Blaue) LED für das Breadboard
 - Ein Kabel für das Breadboard (Erdung)
--  Einen Widerstand (220 Ohm (Rot Rot Braun))
+- Einen Widerstand (220 Ohm (Rot Rot Braun))
 
 ### 2.2. Software & Tools
 - Arduino IDE
@@ -36,19 +36,21 @@ Im folgenden Abschnitt werden die Tools oder Softwares im kurzen beschrieben und
 Beschreibung: Mit der Arduino IDE kann man Code für Arduino Mikrocontroller schreiben und hochladen, um elektronische Projekte zu erstellen und zu automatisieren.
 Link: https://www.arduino.cc/en/software
 
-
 - Download der Software
 - Öffnen des Programs
 - In der Taskleiste: Tools > Board > Board Manager > Nach "Arduino Mbed OS Nano Boards" suchen > "Arduino Mbed OS Nano Boards" installieren
 - Arduino Nano BLE 33 mit Computer per USB verbinden
 - Wenn per USB verbunden: Tools > Port und Arduino auswählen ( "/dev/cu.usbmodem14112" (Arduino Nano BLE 33) )
 
-#### 3.1.2. Brew 
+#### 3.1.2. Brew & Arduino CLI
 Beschreibung: Mit Brew (auch bekannt als Homebrew) kann man unter macOS zusätzliche Softwarepakete und Tools installieren und verwalten, die nicht standardmäßig im Betriebssystem enthalten sind. Wenn Brew noch nicht installiert ist, kann dies über folgenden Link getan werden. 
 Link: https://docs.brew.sh/Installation
 
+- (brew installieren)
 - Terminal aufrufen
 - brew install arduino-cli im Terminal ausführen (Nun kann man Kommandos an den Arduino senden)
+
+Bei Problemen kann der folgende Link weiterhelfen: https://arduino.github.io/arduino-cli/0.31/installation/
 
 #### 3.1.3. Node.js (14 oder höher)
 Beschreibung: Node.js ist eine JavaScript-Laufzeitumgebung, mit der man serverseitige Anwendungen entwickeln und ausführen kann.
@@ -57,6 +59,8 @@ Link: https://nodejs.org/en/
 
 - Terminal aufrufen
 - npm install -g edge-impulse-cli --force im Terminal ausführen
+
+Bei Problemen kann der folgende Link weiterhelfen: https://docs.edgeimpulse.com/docs/development-platforms/officially-supported-mcu-targets/arduino-nano-33-ble-sense
 
 #### 3.1.4. Edge Impulse
 Mit Edge Impulse können Entwickler Machine-Learning-Modelle für die Verarbeitung von Sensor- und IoT-Daten erstellen, trainieren und bereitstellen.
@@ -76,7 +80,6 @@ In diesem Abschnitt wird erklärt wie der Arduino auf das Breadboard gesteckt wu
 - Stromkabel an den weiß markierten Pin des Arduino stecken und das andere Ende auch hinter den blauen Streifen.
 ![IMG_5482](https://user-images.githubusercontent.com/128368064/226367080-7a428b05-c0ec-40f5-9961-d1d2d717e30d.jpg)
 
-
 ## 4. Datenerhebung
 In diesem Abschnitt wird die Datenerhebung über Edge Impulse mithilfe vom Arduino Nano BLE 33 (Sense) beschrieben.
 Um ein ML Modell zu trainieren, werden Daten benötigt. Um die Daten zu sammeln, muss der Arduino zu Beginn mit Edge Impulse verbunden werden.
@@ -86,10 +89,12 @@ Das Modell muss insgesamt 3 Variationen klassifizieren können. Den Posteinwurf,
 ### 4.1. Um den Arduino mit Edge Ipulse zu verbinden, muss dabei zu aller erst, 
 1. der Arduino mit dem Laptop per Kabel verbunden werden, sodass der Arduino leuchtet.
 2. der Terminal auf dem Laptop geöffnet werden.
-3. der Knopf auf dem Arduino gedrückt werden, sodass der Arduino orange aufleuchtet.
+3. der Knopf auf dem Arduino doppelt gedrückt werden, sodass der Arduino orange aufleuchtet.
 4. die Engabe "edge-impulse-daemon" ausgeführt werden. (im Terminal)
 5. die E-Mail und das Passwort des Accounts von Edge Impulse eingegeben werden. (im Terminal)
 6. das Projekt ausgewählt werden, unter welchem die Daten gesammelt werden sollen. (im Terminal)
+
+Bei Problemen kann der folgende Link unter dem Punkt "Connecting to Edge Impulse" weiterhelfen: https://docs.edgeimpulse.com/docs/development-platforms/officially-supported-mcu-targets/arduino-nano-33-ble-sense 
 
 Nun kann der Arduino über den Reiter "Data Acquisition" in Edge Impulse angesteuert werden und das Modell mit Daten gefüttert werden.
 Der Name, der den Datensätzen gegeben wird, ist gleichzeitig das Label für das Training. Das heißt: Wird das Ereignis "Posteinwurf" genannt, so wird unter dem Label "Posteinwurf" der Datensatz gespeichert und erkannt. 
@@ -131,6 +136,8 @@ Durch den Klick auf "Save Parameters" werden die Parameter erstellt. Dies kann e
 Über Edge Impulse > Impulse Design > Classifier kann nun das Training beginnen. 
 In diesem Fall wurde mit den Default Einstellungen gearbeitet. Demenstprechend wurde an den Einstellungen nichts geändert.
 Durch den Klick auf "Start Training" wird das Modell trainiert. Dies kann ein paar Minuten dauern.
+
+Bei Problemen kann sich an folgenden Link: https://docs.edgeimpulse.com/docs/edge-impulse-studio/learning-blocks/classification gewendet werden.
 
 ## 6. Ausführung
 Im letzten Schritt wird der Code des trainierten Modells aus Edge Impulse als ZIP File exportiert und in die Arduino IDE eingepflegt. Nach ein paar kleineren Anpassungen im Code kann das Modell auf den Arduino geladen und letztendlich ausgeführt werden.
