@@ -151,7 +151,7 @@ Deshalb wird in den folgenden Schritten zusätzlich der folgende Code hinzugefü
 
 1. In Zeile 25 muss folgender Code hinzugefügt werden.
 
-  ```#define EI_CLASSIFIER_SENSOR_GYR EI_CLASSIFIER_SENSOR_GYROSCOPE*```
+  ```#define EI_CLASSIFIER_SENSOR_GYR EI_CLASSIFIER_SENSOR_GYROSCOPE```
   ```#define LED 12```
 
     Dieser Code dient dazu dass der Sensor Gyroscope, mit dem die Auswertungen gemacht werden, eingefügt werden.
@@ -159,35 +159,35 @@ Deshalb wird in den folgenden Schritten zusätzlich der folgende Code hinzugefü
  
 2. In Zeile 55 muss in der Methode *void setup()* folgender Code hinzugefügt werden.
 
-    *pinMode(LED, OUTPUT);
-    pinMode(LED_BUILTIN, OUTPUT);*
+    ```pinMode(LED, OUTPUT);```
+    ```pinMode(LED_BUILTIN, OUTPUT);```
  
     Dieser Code dient dazu, dass die gewünschten LED's angesteuert werden können.
 
 3. In Zeile 95 muss in der Methode *void loop()* folgender Code hinzugefügt werden.
 
-    *digitalWrite(LED_BUILTIN, HIGH);
-    delay(1000);                      
-    digitalWrite(LED_BUILTIN, LOW);*
+    ```digitalWrite(LED_BUILTIN, HIGH);```
+    ```delay(1000);```                      
+    ```digitalWrite(LED_BUILTIN, LOW);```
     
     Dieser Code dient dazu, dass vor jeder Aufnahme von Bewegungen durch den Arduino, die orangene LED des Arduino kurz aufleuchtet.
 
  4. In Zeile 108 wurde in der Methode *void loop()* folgender Code abgeändert.
  
-    *IMU.readAccelerometer(buffer[ix], buffer[ix + 1], buffer[ix + 2]);* in *IMU.readGyroscope(buffer[ix], buffer[ix + 1], buffer[ix + 2]);*
+    ```IMU.readAccelerometer(buffer[ix], buffer[ix + 1], buffer[ix + 2]);``` in ```IMU.readGyroscope(buffer[ix], buffer[ix + 1], buffer[ix + 2]);```
     
     Diese Code Änderung dient dazu, dass nur die Gyroscope Daten durch den Arduino aufgenommen werden.
  
  5. Zu guter letzt wurde in Zeile 148 in der Methode *void loop()* folgender Code am Ende der Methode hinzugefügt.
 
-    *if (result.classification[ix].label == "Einwurf" && result.classification[ix].value > 0.5) {
+    ```if (result.classification[ix].label == "Einwurf" && result.classification[ix].value > 0.5) {
     digitalWrite(LED, HIGH);
     //digitalWrite(BLUE, HIGH);
     } 
     else if (result.classification[ix].label == "Postentnahme" && result.classification[ix].value > 0.5) {
     digitalWrite(LED, LOW);
     //digitalWrite(BLUE, LOW);
-    }*
+    }```
   
     Dieser Code dient dazu, wenn das Label Einwurf mit einer Wahrscheinlichkeit von p > 0,5 klassifiziert wurde, die LED 12, blau aufleuchtet.
     Wurde das Label Postentnahme mit einer Wahrscheinlichkeit von p > 0,5 klassifiziert, wird die LED 12 ausgeschalten.
