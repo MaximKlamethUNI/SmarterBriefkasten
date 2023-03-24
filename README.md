@@ -1,6 +1,6 @@
 # Smarter Briefkasten
 Diese ReadMe File dient als Anleitung zur Konstruktion eines smarten Briefkastens mit einem Arduino Nano BLE (Sense) und einem MacOs Computer. 
-Die Anleitung ist in die Punkte: Einleitung, Hardware & Software, Installation, Datenerhebung, Training des Modells und Ausführung aufgeteilt.
+Die Anleitung ist in die Punkte: Einleitung, Hardware & Software, Installation, Datenerhebung, Training des Modells, Ausführung und Troubleshooting & Weiteres aufgeteilt.
 Das Ergebnis dieser Anleitung ist ein funktionierendes Tiny Machine Learning Modell auf einem Arduino Nano BLE 33 (Sense), dass durch eigenständige Anbringung an einen Briefkasten, die im Punkt "Einleitung" beschriebende Funktionalität aufweist.
 
 ## 1. Einleitung
@@ -208,7 +208,23 @@ if (result.classification[ix].label == "Einwurf" && result.classification[ix].va
 
    Dieser Code dient dazu, wenn das Label Einwurf mit einer Wahrscheinlichkeit von p > 0,5 klassifiziert wurde, die LED 12, blau aufleuchtet.
    Wurde das Label Postentnahme mit einer Wahrscheinlichkeit von p > 0,5 klassifiziert, wird die LED 12 ausgeschalten.
-  
+ 
+## Troubleshooting & Weiteres
+In diesem Abschnitt sollen mögliche Problemszenarien aufgelistet werden, die im Laufe des Projektes aufgetreten sind.
+
+1. Rauschen
+Bei der Durchführung des Projektes kann es dazu kommen, dass der Arduino Bewegungen feststellt, obwohl man den Arduino garnicht bewegt. Das sogenannte Rauschen kann bei der Vorhersage der Labels, das Ergebnis beeinflussen.
+
+2. Anzahl der Parameter
+Je nach Anwendungsfall kann es möglicherweise von Vorteil sein, neben den Gyroscope Daten, ebenfalls die Accelerometer Daten in das Training einzubeziehen. Dies ist in diesem Projekt nicht der Fall gewesen, heißt aber nicht dass es in anderen Projekten nicht wichtig sein kann.
+
+3. Audio Daten hinzufügen
+Was in diesem Projekt zeitlich nicht geschafft wurde, jedoch für die Vorhersage der Labels möglicherweise von Vorteil gewesen wäre, ist die Einbindung von Audio Daten. Hierbei wäre es möglich gewesen, Gyroscope und Audio Daten zu kombinieren sodass eine noch bessere Vorhersage getroffen werden kann.
+
+
+
+
+
 
 
 
